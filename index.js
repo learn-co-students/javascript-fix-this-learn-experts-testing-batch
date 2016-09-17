@@ -8,9 +8,7 @@ var cake = {
   decorate: function(updateFunction) {
     var status = "Decorating with " + this.topping + ". Ready to eat soon!"
     updateFunction(status)
-    setTimeout(function() {
-      updateFunction(serve.apply(this, "Happy Eating!", this.customer))
-    }, 2000)
+    setTimeout(() => updateFunction(serve.apply(this, "Happy Eating!", this.customer)), 2000)
   }
 }
 
@@ -24,7 +22,7 @@ var pie = {
 }
 
 function makeCake() {
-  var updateCakeStatus;
+  var updateCakeStatus = updateStatus.bind(this);
   mix(updateCakeStatus)
 }
 
@@ -34,17 +32,19 @@ function makePie() {
 }
 
 function updateStatus(statusText) {
+  // debugger
   this.getElementsByClassName("status")[0].innerText = statusText
 }
 
 function bake(updateFunction) {
   var status = "Baking at " + this.bakeTemp + " for " + this.bakeTime
-  setTimeout(function() {
+  setTimeout(() => {
     cool(updateFunction)
   }, 2000)
 }
 
 function mix(updateFunction) {
+  debugger;
   var status = "Mixing " + this.ingredients.join(", ")
   setTimeout(function() {
     bake(updateFunction)
@@ -62,6 +62,13 @@ function cool(updateFunction) {
 function makeDessert() {
   //add code here to decide which make... function to call
   //based on which link was clicked
+  if (this.text === 'Make Pie') {
+    console.log('Making Pie...')
+    makePie();
+  } else {
+    console.log('Making Cake...')
+    makeCake();
+  }
 }
 
 function serve(message, customer) {
