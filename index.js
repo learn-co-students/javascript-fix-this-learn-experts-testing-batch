@@ -60,6 +60,7 @@ function cool(updateFunction) {
 }
 
 function makeDessert() {
+  console.log(this)
   //add code here to decide which make... function to call
   //based on which link was clicked
 }
