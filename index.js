@@ -5,12 +5,12 @@ var cake = {
   bakeTemp: "425 degrees",
   bakeTime: "45 minutes",
   customer: "Tommy",
-  decorate: function(updateFunction) {
+  decorate: updateFunction => {
     var status = "Decorating with " + this.topping + ". Ready to eat soon!"
-    updateFunction(status)
-    setTimeout(function() {
-      updateFunction(serve.apply(this, "Happy Eating!", this.customer))
-    }, 2000)
+    updateFunction(status).apply(cake)
+    setTimeout( ()=>{
+      updateFunction(serve.apply(this, "Happy Eating!", this.customer)).apply(cake)
+    }, 2000).apply(this)
   }
 }
 
@@ -24,13 +24,14 @@ var pie = {
 }
 
 function makeCake() {
-  var updateCakeStatus;
+  var updateCakeStatus = updateStatus
   mix(updateCakeStatus)
 }
 
 function makePie() {
   var updatePieStatus;
   mix(updatePieStatus)
+  pie.decorate = cake.decorate.bind(pie);
 }
 
 function updateStatus(statusText) {
