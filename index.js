@@ -5,15 +5,14 @@ var cake = {
   bakeTemp: "425 degrees",
   bakeTime: "45 minutes",
   customer: "Tommy",
-  decorate: updateFunction => {
+  decorate: function(updateFunction) {
     var status = "Decorating with " + this.topping + ". Ready to eat soon!"
-    updateFunction(status).apply(cake)
-    setTimeout( ()=>{
-      updateFunction(serve.apply(this, "Happy Eating!", this.customer)).apply(cake)
-    }, 2000).apply(this)
+    updateFunction(status)
+    setTimeout(() => {
+      updateFunction(serve.apply(this, ["Happy Eating!", this.customer]))
+    }, 2000)
   }
 }
-
 var pie = {
   name: "Apple Pie",
   ingredients: ["apples", "flour", "eggs", "butter", "sugar"],
