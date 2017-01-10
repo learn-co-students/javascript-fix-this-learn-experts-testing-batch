@@ -17,7 +17,7 @@ describe('index', function() {
     })
 
     let update
-    before(function() {
+    before(() => {
       update = updateStatus.bind(document.getElementById("pie"))
     })
 
